@@ -1,14 +1,15 @@
 import React from 'react'
+import Navbar from 'src/(components)/Navbar'
 
 
 const DashboardWraper = ({children}:{children:React.ReactNode}) => {
   return (
-    <div className='flex min-h-screen w-full bg-gray-50 text-gray-900 '>
+    <div className='flex min-h-screen w-full bg-gray-50 text-gray-900  '>
         {/* sidebar */}
-        sidebar
+        sidebar 
         <main className='dark:bg-dark-bg flex w-full flex-col bg-gray-50 md:pl-64'>
             {/* navbar */}
-            navbar
+            <Navbar/>
             {children}
         </main>
     </div>
