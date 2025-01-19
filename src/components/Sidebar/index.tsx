@@ -6,11 +6,13 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "src/app/redux";
 import { setIsSidebarCollapsed } from "src/state";
+import { useGetProjectsQuery } from "src/state/api";
 
 const Sidebar = () => {
   const [showProject, setShowProject] = useState(true);
   const [priority, setPriority] = useState(true);
   const dispatch = useAppDispatch()
+  const { data:projects } = useGetProjectsQuery()
   const isSidebarCollapsed = useAppSelector((state)=>state.global.isSidebarCollapsed);
   const sidebarClassname = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 z-40 dark:bg-black overflow-y-auto bg-white ${isSidebarCollapsed ? 'w-0 hidden' : 'w-64'}`;
   return (
@@ -57,6 +59,10 @@ const Sidebar = () => {
               <ChevronDown className="h-5 w-5"/>
             )}
         </button>
+          {/* LIST PROJECT HERE */}
+          {showProject && projects?.map((project)=>(
+            <SideBarLink key={project.id} icon={Briefcase} href={`/project/${project.id}`} lable={project.name}/>
+          ))}
         {/* PRIORITIES */}
         <button onClick={()=>setPriority((pre) => !pre)}
           className="flex w-full items-center justify-between px-8 py-3 text-gray-500">
