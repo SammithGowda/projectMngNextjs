@@ -5,14 +5,14 @@ import ProjectHeader from "./ProjectHeader"
 import Board from '../boardView'
 import ListView from '../listView'
 import TimeLine from '../timeLine'
-import TableView from './TableView'
+import TableView from '../TableView'
 type Props = {
     params:Promise<{id:string}>
 }
 
 const page = ({params}: Props) => {
   const { id } = React.use(params);
-  const [activeTab, setActiveTab] = useState("TimeLine");
+  const [activeTab, setActiveTab] = useState("");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
   return (
