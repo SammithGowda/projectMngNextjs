@@ -4,13 +4,15 @@ import React,{useState} from 'react'
 import ProjectHeader from "./ProjectHeader"
 import Board from '../boardView'
 import ListView from '../listView'
+import TimeLine from '../timeLine'
+import TableView from './TableView'
 type Props = {
     params:Promise<{id:string}>
 }
 
 const page = ({params}: Props) => {
   const { id } = React.use(params);
-  const [activeTab, setActiveTab] = useState("List");
+  const [activeTab, setActiveTab] = useState("TimeLine");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
   return (
@@ -21,6 +23,12 @@ const page = ({params}: Props) => {
       )}
       {activeTab==="List"&&(
         <ListView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen}/>
+      )}
+      {activeTab==="Timeline"&&(
+        <TimeLine id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen}/>
+      )}
+      {activeTab==="Table"&&(
+        <TableView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen}/>
       )}
     </div>
   )
