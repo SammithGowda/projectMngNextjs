@@ -61,6 +61,12 @@ export interface Task {
 
 }
 
+export interface SearchResults {
+  tasks?: Task[];
+  projects?: Project[];
+  users?: User[];
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL }),
   reducerPath: "api",
@@ -103,7 +109,11 @@ export const api = createApi({
         { type: "Tasks", id: taskId },
       ],
   }),
+
+  search :build.query<SearchResults,string>({
+    query: (query) => `search?query=${query}`,
+  })
 })
 });
 
-export const {useGetProjectsQuery,useCreateProjectMutation,useGetTasksQuery,useCreateTaskMutation,useUpdateTaskStatusMutation} = api;
+export const {useGetProjectsQuery,useCreateProjectMutation,useGetTasksQuery,useCreateTaskMutation,useUpdateTaskStatusMutation,useSearchQuery} = api;
