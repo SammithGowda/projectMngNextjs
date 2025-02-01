@@ -9,7 +9,7 @@ type Props = {
     id?:string|null
 }
 
-function ModalNewTask({isOpen,onClose,id}: Props) {
+function ModalNewTask({isOpen,onClose,id=null}: Props) {
     const [createTask,{isLoading}] = useCreateTaskMutation();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -47,7 +47,7 @@ function ModalNewTask({isOpen,onClose,id}: Props) {
     }
 
     const isFormValid = () => {
-        return title && authorUserId
+        return title && authorUserId && !(id !== null || projectId);
       };
 
     const selectStyles =
@@ -142,6 +142,15 @@ function ModalNewTask({isOpen,onClose,id}: Props) {
           value={assignedUserId}
           onChange={(e) => setAssignedUserId(e.target.value)}
         />
+        {id === null &&(
+          <input
+          type="text"
+          className={inputStyles}
+          placeholder="Project Id"
+          value={projectId}
+          onChange={(e) => setProjectId(e.target.value)}
+        />
+        )}
         <button
           type="submit"
           className={`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent bg-blue-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
